@@ -29,13 +29,20 @@ body {
     width: 100vw;
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    gap: 5%;
     align-items: center;
     justify-content: center;
+    /* justify-content: space-around; */
     background: linear-gradient(231deg, rgba(22, 6, 40, 1) 0%, rgba(52, 28, 79, 1) 50%, rgba(88, 7, 125, 1) 100%);
 }
 
-.container {
+.gif-1{
+    width: 30%;
+    mix-blend-mode: multiply;
+}
+
+.main-container {
     width: 90%;
     max-width: 450px;
 }
@@ -49,7 +56,7 @@ h1 {
     line-height: 1.2;
 }
 
-.display-container {
+.password-tab {
     position: relative;
     background-color: var(--dk-violet);
     border-radius: 1rem;
@@ -84,14 +91,14 @@ h1 {
     transform: translateY(-50%);
 }
 
-.display-container button {
+.password-tab button {
     position:absolute;
     top:50%;
     right:1.5rem;
     transform: translateY(-50%);
 }
 
-.input-container{
+.input-window{
     width:100%;
     background-color: var(--dk-violet);
     border-radius: 1rem;
@@ -100,26 +107,26 @@ h1 {
 }
 
 
-.length-container {
+.length-bar{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 
-.length-container p:nth-child(1) {
+.length-bar p:nth-child(1) {
     color:var(--pl-white);
     font-size: 1.5rem;
 }
 
 
-.length-container p:nth-child(2) {
+.length-bar p:nth-child(2) {
     color:var(--vb-yellow);
     font-size: 1.5rem;
 }
 
 
-.strength-container {
+.strength-tab {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -127,8 +134,7 @@ h1 {
     margin-bottom: 2rem;
 }
 
-
-.strength-container p{
+.strength-tab p{
     color:var(--pl-white);
     font-size: 1.5rem;
 }
@@ -139,9 +145,10 @@ h1 {
     border-radius:50%;
 }
 
-.generate-button {
+.generator-button {
     width: 100%;
     padding: 1rem 0;
+    cursor: pointer;
     background-color: var(--vb-violet);
     text-align: center;
     border-radius: 0.75rem;
@@ -153,7 +160,7 @@ h1 {
     font-size: 1.25rem;
     scale: 0.9;
   }
-.generate-button:hover{
+.generator-button:hover{
     scale: 1;
     transition: all;
     transition-duration: 200ms;
@@ -165,6 +172,12 @@ h1 {
     align-items: center;
     margin: 1rem 0;
     gap: 0 1rem;
+    cursor: pointer;
+
+    /* justify-content: space-between;  */
+}
+.checkCases{
+    cursor: pointer;
 }
 
 .check input{
@@ -200,10 +213,12 @@ h1 {
     letter-spacing: 0.75px;
 }
 
+
 .copyBtn{
     background-color: transparent;
     border:none;
     outline:none;
+    cursor: pointer;
 }
 
 .tooltip {
@@ -266,22 +281,8 @@ h1 {
     box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
 }
 
-
-/*Homework -> Explore below code */
-/* .slider::-moz-range-thumb {
-    position: relative;
-    z-index: 1;
-    appearance: none;
-    height: 2rem;
-    width: 2rem;
-    border-radius: 50%;
-    background: var(--vb-yellow);
-    box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.50);
-    cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb:hover {
-    outline: 2px solid var(--vb-yellow);
-    background-color: var(--dk-violet);
-    box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
-  } */
+@media screen and (max-width:768px) {
+    .gif-1{
+        display: none;
+    }
+}

@@ -15,10 +15,18 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <div class="container">
+    <iframe src="https://giphy.com/embed/LESpNIDaNBUcRIPzng" width="480" height="466" frameBorder="0"
+            class="giphy-embed gif-1">
+    </iframe>
+    <!--   -----------SOURCE OF THIS "GIF"------------------
+        "https://giphy.com/gifs/gears-setting-configure-LESpNIDaNBUcRIPzng"
+        allowFullScreen
+    -->
+
+    <div class="main-container">
         <h1>Password Generator</h1>
         <!-- -----display-container----- -->
-        <div class="display-container">
+        <div class="password-tab">
             <input readonly class="display" placeholder="Password" data-passwordDisplay>
             <button class="copyBtn" data-copy>
                 <span class="tooltip" data-copyMsg></span>
@@ -28,9 +36,9 @@
         </div>
 
         <!-- -------input-container----- -->
-        <div class="input-container">
+        <div class="input-window">
             <!-- password-length-section -->
-            <div class="length-container">
+            <div class="length-bar">
                 <p>Password length</p>
                 <p data-lengthNumber>0</p>
             </div>
@@ -41,38 +49,39 @@
             <!-- -checkBoxes- -->
             <div class="check">
                 <input type="checkbox" id="uppercase">
-                <label for="uppercase">Include Uppercase Letters</label>
+                <label for="uppercase" class="checkCases">Include Uppercase Letters</label>
             </div>
 
             <div class="check">
                 <input type="checkbox" id="lowercase">
-                <label for="lowercase">Include Lowercase Letters</label>
+                <label for="lowercase" class="checkCases">Include Lowercase Letters</label>
             </div>
 
             <div class="check">
                 <input type="checkbox" id="numbers">
-                <label for="numbers">Include Numbers </label>
+                <label for="numbers" class="checkCases">Include Numbers </label>
             </div>
 
             <div class="check">
                 <input type="checkbox" id="symbols">
-                <label for="symbols">Include Symbols  </label>
+                <label for="symbols" class="checkCases">Include Symbols  </label>
             </div>
 
 
             <!-- strength-section -->
-            <div class="strength-container">
+            <div class="strength-tab">
                 <p>Strength</p>
                 <div class="indicator" data-indicator></div>
             </div>
 
             <!-- -last-button- -->
-            <button class="generate-button">
+            <button class="generator-button">
                 GENERATE PASSWORD
             </button>
         </div>
 
     </div>
+
     <script src="./script.js"></script>
 </body>
 </html>

@@ -1,39 +1,44 @@
-const inputSlider = document.querySelector("[data-lengthSlider]");
+const lengthSlider = document.querySelector("[data-lengthSlider]");
+// const inputSlider = document.querySelector("[data-lengthSlider]");
 const lengthDisplay = document.querySelector("[data-lengthNumber]");
-const passwordDisplay = document.querySelector("[data-passwordDisplay]");
+const passwordTab = document.querySelector("[data-passwordDisplay]");
+// const passwordDisplay = document.querySelector("[data-passwordDisplay]");
 const copyBtn = document.querySelector("[data-copy]");
 const copyMsg = document.querySelector("[data-copyMsg]");
 const uppercaseCheck = document.querySelector("#uppercase");
 const lowercaseCheck = document.querySelector("#lowercase");
 const numbersCheck = document.querySelector("#numbers");
 const symbolsCheck = document.querySelector("#symbols");
-const indicator = document.querySelector("[data-indicator]");
-const generateBtn = document.querySelector(".generate-button");
+const lightIndicator = document.querySelector("[data-indicator]");
+// const indicator = document.querySelector("[data-indicator]");
+const generatorBtn = document.querySelector(".generator-button");
 const allCheckBox = document.querySelectorAll("input[type=checkbox]");
-const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
+const symbolsList = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
+// const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
+
 
 // -initailly- //
 let password="";
 let passwordLength = 10;
-let checkCount = 0;
-setIndicator("#ccc");
+let countCheck = 0;
+setLightIndicator("#ccc");
 
-handleSlider();
+handlingSlider();
 
 // set password ki length
-function handleSlider() {
-    inputSlider.value = passwordLength;
+function handlingSlider() {
+    lengthSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
 
-    const min = inputSlider.min;
-    const max = inputSlider.max;
-    inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
+    const min = lengthSlider.min;
+    const max = lengthSlider.max;
+    lengthSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
 
 }
 
-function setIndicator(color) {
-    indicator.style.backgroundColor = color;
-    indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
+function setLightIndicator(color) {
+    lightIndicator.style.backgroundColor = color;
+    lightIndicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
 }
 
 function getRandomInteger(min, max) {
@@ -50,11 +55,11 @@ function generateUpperCase() {
     return String.fromCharCode(getRandomInteger(65,91));
 }
 function generateSymbol(){
-    const randomSymbolIndex = getRandomInteger(0, symbols.length);
-    return symbols.charAt(randomSymbolIndex);
+    const randomSymbolIndex = getRandomInteger(0, symbolsList.length);
+    return symbolsList.charAt(randomSymbolIndex);
 }
 
-function calcStrength() {
+function findStrength() {
     let hasUpper = false;
     let hasLower = false;
     let hasNum = false;
@@ -66,21 +71,21 @@ function calcStrength() {
   
     if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) 
         {
-        setIndicator("#0f0");
+            setLightIndicator("#0f0");
         }
     else if ( (hasLower || hasUpper) && (hasNum || hasSym) && passwordLength >= 6) 
         {
-        setIndicator("#ff0");
+            setLightIndicator("#ff0");
         }
     else 
         {
-        setIndicator("#f00");
+            setLightIndicator("#f00");
         }
 }
 
 async function copyContent () {
     try{
-        await navigator.clipboard.writeText(passwordDisplay.value);
+        await navigator.clipboard.writeText(passwordTab.value);
         copyMsg.innerText = "Copied!";
     }
     catch(e){
@@ -109,40 +114,40 @@ function shufflingPassword(array) {
 }
 
 function handleCheckBoxChange(){
-    checkCount = 0;
+    countCheck = 0;
     allCheckBox.forEach( (checkBox) => {
         if(checkBox.checked)
-            checkCount++;
+            countCheck++;
     })
 
     // corner case
-    if(passwordLength < checkCount){
-        passwordLength = checkCount;
-        handleSlider();
+    if(passwordLength < countCheck){
+        passwordLength = countCheck;
+        handlingSlider();
     }
 }
 allCheckBox.forEach((checkBox) => {
     checkBox.addEventListener('change', handleCheckBoxChange);
 })
 
-inputSlider.addEventListener('input', (e) => {
+lengthSlider.addEventListener('input', (e) => {
     passwordLength = e.target.value;
-    handleSlider();
+    handlingSlider();
 })
 
 copyBtn.addEventListener('click', () => {
-    if(passwordDisplay.value)
+    if(passwordTab.value)
         copyContent();
 })
 
-generateBtn.addEventListener('click', () => {
+generatorBtn.addEventListener('click', () => {
     //none of the checkbox are selected
-    if(checkCount == 0)
+    if(countCheck == 0)
         return;
 
-    if(passwordLength < checkCount){
-        passwordLength = checkCount;
-        handleSlider();
+    if(passwordLength < countCheck){
+        passwordLength = countCheck;
+        handlingSlider();
     }
 
     // finding--new-password....
@@ -176,7 +181,7 @@ generateBtn.addEventListener('click', () => {
     for(let i = 0; i < funcArr.length; i++){
         password += funcArr[i]();
     }
-    console.log("necessary adddition done");
+    console.log("necessary addition done");
 
     //rest of the characters
     //for(let i = funcArr.length; i < password.length; i++)
@@ -192,10 +197,10 @@ generateBtn.addEventListener('click', () => {
     console.log("shuffling... done");
 
     //showing in UI
-    passwordDisplay.value = password;
+    passwordTab.value = password;
     console.log("adding in UI done");
 
     //stregth indicator updation
-    calcStrength();
+    findStrength();
 
 })
